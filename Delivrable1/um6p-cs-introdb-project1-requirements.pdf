@@ -1,0 +1,138 @@
+
+
+
+
+
+
+
+Gym Database Application
+- Requirements -
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BLALI Yassine
+
+
+
+
+
+
+
+
+
+
+
+Introduction:
+
+In the world of fitness and health management, having a well-organized Gym Database Management System is crucial. Our Gym Database Project is a direct response to the need for efficient gym management that makes life easier for both members and administrators. 
+ 
+Within this document, you'll find the detailed requirements that serve as the basis for designing and implementing our database and system. Indeed, it will help to effectively manage the gym's operations, employees, customers, equipment, memberships, and facilities while adhering to specific business rules and constraints.
+
+Entities:
+
+1. Employee:
+  Each employee should have a unique employee ID (E.id) for identification.
+ An Employee’s Salary should be positive numerical value.
+ First_day_work should be a valid date and should not be in the future.
+ Employees must have valid Contact information.
+  All employees are entitled to a minimum break time of 30 minutes after every 4 hours of continuous work.
+ Each year, an employee's leave entitlement increases by an additional 30 days and with each absence, the entitlement decreases. However, it should not go below 0 days.
+ Employees, other than trainers, do not have access to gym equipment for personal use.
+ Employees are expected to maintain consistent attendance and notify their supervisors of any planned absences or lateness.
+
+2. Customer:
+   Each customer should have a unique customer ID (C.id) for identification.
+   BirthDate should be valid.
+   Customers must have valid contact information.
+   Customers should be at least the minimum age to sign up for gym discipline.
+
+3. Membership:
+ Each type of membership should have a unique membership id.
+ The duration of membership should be a positive integer (e.g., in months).
+Grace period would be calculated based on its duration, the disciplines involved, and the number of people involved.
+The cancellation deadline would be based on its duration, the disciplines involved, and the number of people involved.
+The reduction percentage would be calculated based on its duration, the disciplines involved, and the number of people involved.
+
+
+
+
+4. Equipment:
+   Each piece of equipment should have a unique equipment ID (equipment_id) that follows a predefined format.
+ The brand of the equipment (brand) should adhere to a predefined list of acceptable brands.
+  The state of the equipment (state) should be a numeric value within a valid range (e.g., between 0% and 100%).
+   All gym equipment must undergo regular maintenance every two months.
+   If the state of equipment (state) falls below 40%, a technician should be called.
+
+5. Discipline:
+   Each discipline should have a unique discipline ID (C.id).
+
+ 6. Feedback: 
+  ID Constraint: Each feedback should have a unique ID (F_id).
+
+ 7. Space:
+Capacity Constraint: The capacity should be a positive integer, indicating the maximum number of people allowed in that space.
+Space ID Constraint: Each space should have a unique ID (space_id).
+State of space: The state_of_the space attribute should be a numeric value within a valid range (e.g., between 0% and 100%).
+Last check date of the space: The last_check_date attribute of the space should be a valid date, and it should not be in the future.
+
+Relationships:
+1. “Subscribed” relationship:
+Each subscription should have a unique payment ID for identification (payment.id).
+The date of payment should be valid and should not be in the future.
+The date of payment should be after the registration date of the customer concerned.
+ The system should automatically notify customers before their membership is due for renewal and prevent access to the gym if the membership is not renewed.
+ The gym only accepts cash and credit card payments so the type of payment should be valid.
+
+2.” Has” relationship:
+Each discipline can be associated with any number of memberships.
+Each membership can have at least one discipline.
+
+3.” Associated with” relationship:
+Each training space is associated with one and only one discipline.
+Each discipline is associated with one and only one training space.
+
+
+
+
+4.” Experts_in” relationship:
+Each discipline has at least one trainer who is experienced in it.
+Each trainer should be an expert in at least one discipline.
+
+5.” Maintains” relationship:
+Each technician maintains at least one piece of equipment and equipment is maintained by at least one technician.
+
+6.” Reports” relationship:
+A costumer is free to make as many reports as they want.
+A feedback must be reported by exactly one customer.
+
+7.” Contains” relationship:
+Each equipment is contained in one and only one space .
+Each space can contain any number of equipment.
+
+8.” Addresses” relationship:
+Each feedback is addressed by one and only one admin employee.
+Each admin employee can address any amount of feedback.
+
+9.” Checks” relationship:
+Each space can be checked by any number of technicians.
+Each technician can check any number of spaces.
+
+10.” Assigned to” relationship:
+Each admin can have one and only one office.
+At least one admin employee is required in an office.
+11.” Rents” relationship:
+A costumer has the choice to rent a locker or not.
+A locker room can be rented by at one customer
