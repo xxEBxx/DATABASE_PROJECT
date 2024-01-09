@@ -1,0 +1,172 @@
+mysql> source C:\Users\hp\Desktop\Deliverable2\um6p-cs-introdb-project1-ddl.sql
+Query OK, 26 rows affected (0.29 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Database changed
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.07 sec)
+
+Query OK, 0 rows affected (0.05 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> show tables;
++----------------------+
+| Tables_in_gym        |
++----------------------+
+| checks               |
+| customer             |
+| discipline           |
+| e_admin              |
+| employee             |
+| end_time_founder     |
+| equipment_barcode    |
+| equipment_details    |
+| equipment_type_brand |
+| experts_in           |
+| feedback             |
+| has                  |
+| locker_room          |
+| lounge               |
+| maintains            |
+| membership           |
+| min_age_founder      |
+| office               |
+| pricefounder         |
+| rents                |
+| s_session            |
+| space                |
+| subscribed           |
+| technician           |
+| trainer              |
+| training_space       |
++----------------------+
+26 rows in set (0.00 sec)
+
+mysql> show triggers;
++----------------------------------------------+--------+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| Trigger                                      | Event  | Table      | Statement
+
+
+
+
+                                                                                                          | Timing | Created                | sql_mode
+                    | Definer        | character_set_client | collation_connection | Database Collation |
++----------------------------------------------+--------+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+| prevent_future_dates_customer_birth_date     | INSERT | customer   | BEGIN
+    IF NEW.birth_date > NOW() THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot insert future dates into the birth_date column of the customer table.';
+    END IF;
+END
+
+                                                                                                                                                                                                           | BEFORE | 2023-12-05 23:39:03.66 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | cp850                | cp850_general_ci     | utf8mb4_0900_ai_ci |
+| prevent_member_access                        | INSERT | customer   | BEGIN
+    DECLARE member_age INT;
+    DECLARE max_discipline_age INT;
+
+
+    SET member_age = TIMESTAMPDIFF(YEAR, NEW.birth_date, CURDATE());
+
+
+    SELECT MAX(maf.minimum_age) INTO max_discipline_age
+    FROM has as md
+    JOIN Discipline d ON md.discipline_id = d.discipline_id
+    JOIN Min_age_founder maf ON d.d_name = maf.d_name
+    WHERE md.membership_id IN (SELECT membership_id FROM subscribed WHERE customer_id = NEW.customer_id);
+
+
+    IF member_age < max_discipline_age THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Member cannot access the membership due to age restrictions.';
+    END IF;
+END | BEFORE | 2023-12-05 23:39:03.67 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | cp850                | cp850_general_ci     | utf8mb4_0900_ai_ci |
+| prevent_future_dates_employee_first_day_work | INSERT | employee   | BEGIN
+    IF NEW.first_day_work > NOW() THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot insert future dates into the first_day_work column of the employee table.';
+    END IF;
+END
+
+
+                                                                           | BEFORE | 2023-12-05 23:39:03.67 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | cp850                | cp850_general_ci     | utf8mb4_0900_ai_ci |
+| enforce_max_people_membership                | INSERT | subscribed | BEGIN
+    DECLARE current_people_count INT;
+
+
+    SELECT COUNT(*) INTO current_people_count
+    FROM Subscribed
+    WHERE membership_id = NEW.membership_id;
+
+    IF current_people_count >= 5 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Error: Maximum 5 people allowed in a membership';
+    END IF;
+END
+
+                                                                         | BEFORE | 2023-12-05 23:39:03.65 | ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION | root@localhost | cp850                | cp850_general_ci     | utf8mb4_0900_ai_ci |
++----------------------------------------------+--------+------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------+------------------------+-----------------------------------------------------------------------------------------------------------------------+----------------+----------------------+----------------------+--------------------+
+4 rows in set (0.00 sec)

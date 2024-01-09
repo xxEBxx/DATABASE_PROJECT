@@ -1,0 +1,77 @@
+mysql> source C:\Users\hp\Desktop\Deliverable2\um6p-cs-introdb-project1-dml.sql
+Database changed
+Empty set (0.00 sec)
+
++-------------+--------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+----------+--------------------+----------+
+| feedback_id | f_title                                                                        | f_text
+
+
+
+
+                                                                                                   | customer_id | admin_id | customer_name      | admin_id |
++-------------+--------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+----------+--------------------+----------+
+|           1 | lorem, eget mollis lectus pede et risus. Quisque libero lacus,                 | rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis, magna tellus faucibus leo, in lobortis tellus justo sit amet nulla. Donec non justo. Proin non massa non ante bibendum ullamcorper. Duis cursus, diam at pretium aliquet, metus urna convallis erat, eget tincidunt dui augue eu tellus. Phasellus elit pede, malesuada vel, venenatis vel, faucibus id, libero. Donec
+                                                                                                   |          22 |       10 | Gregory Mooney     |       10 |
+|           2 | mollis. Phasellus                                                              | lacus vestibulum lorem, sit amet ultricies sem magna nec quam. Curabitur vel lectus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec dignissim magna
+
+
+                                                                                                   |          46 |        1 | Daniel Odonnell    |        1 |
+|           3 | Aenean eget magna. Suspendisse tristique neque venenatis lacus. Etiam bibendum | consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et nunc. Quisque ornare tortor at risus. Nunc ac sem ut
+
+
+                                                                                                   |          72 |        2 | Alvin Lopez        |        2 |
+|           4 | Donec tincidunt. Donec vitae erat vel pede blandit                             | laoreet, libero et tristique pellentesque, tellus sem mollis dui, in sodales elit erat vitae risus. Duis a mi fringilla mi lacinia mattis. Integer eu lacus. Quisque imperdiet, erat nonummy ultricies ornare, elit elit fermentum risus, at fringilla purus mauris a nunc. In at pede. Cras vulputate velit eu sem. Pellentesque ut ipsum ac mi eleifend egestas. Sed
+
+                                                                                                   |          35 |        4 | Elaine Bell        |        4 |
+|           5 | placerat, orci                                                                 | et, magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis, magna tellus faucibus
+
+
+                                                                                                   |          26 |        4 | Christie Burns     |        4 |
+|           6 | tellus eu augue porttitor                                                      | felis orci, adipiscing non, luctus sit amet, faucibus ut, nulla. Cras eu tellus eu augue porttitor interdum. Sed auctor odio a purus. Duis elementum, dui quis accumsan convallis, ante lectus convallis est, vitae sodales nisi magna sed dui. Fusce aliquam, enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque. In ornare sagittis
+                                                                                                   |          73 |        7 | Antonio Clark      |        7 |
+|           7 | tellus. Phasellus elit pede, malesuada vel, venenatis                          | fermentum fermentum arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Phasellus ornare. Fusce mollis. Duis sit amet diam eu dolor egestas rhoncus. Proin nisl sem, consequat nec, mollis vitae, posuere at, velit. Cras lorem lorem, luctus ut, pellentesque eget, dictum placerat, augue. Sed molestie. Sed id risus quis diam luctus lobortis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Mauris ut quam vel sapien imperdiet ornare. In faucibus. Morbi vehicula. Pellentesque tincidunt tempus risus.                                                                                      |          50 |        8 | Darlene Bryant     |        8 |
+|           8 | nibh lacinia orci, consectetuer                                                | orci lacus vestibulum lorem, sit amet ultricies sem magna nec quam. Curabitur vel lectus. Cum sociis natoque penatibus et
+
+
+
+                                                                                                   |          94 |        8 | Justin May         |        8 |
+|           9 | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam              | magnis dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam gravida molestie arcu. Sed eu nibh vulputate mauris sagittis placerat. Cras dictum ultricies ligula. Nullam enim. Sed nulla ante, iaculis nec, eleifend non, dapibus rutrum, justo. Praesent luctus. Curabitur egestas nunc sed libero. Proin sed turpis nec mauris blandit mattis. Cras eget nisi dictum augue malesuada malesuada. Integer id magna et ipsum cursus vestibulum. Mauris magna. Duis dignissim tempor arcu. Vestibulum ut eros non enim commodo hendrerit. Donec porttitor tellus non magna. Nam ligula elit, pretium et, rutrum non, hendrerit id, ante. Nunc |          56 |        7 | Christopher Nelson |        7 |
+|          10 | vitae purus gravida sagittis. Duis gravida. Praesent                           | purus sapien, gravida non, sollicitudin a, malesuada id, erat. Etiam vestibulum massa rutrum magna. Cras convallis convallis dolor. Quisque tincidunt pede ac urna. Ut tincidunt vehicula risus. Nulla eget metus eu
+
+
+                                                                                                   |          21 |        6 | Kimberly Mathis    |        6 |
++-------------+--------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+----------+--------------------+----------+
+10 rows in set (0.00 sec)
+
+Empty set (0.00 sec)
+
++----------+------------+
+| space_id | rent_price |
++----------+------------+
+|       63 |       NULL |
+|       76 |       NULL |
+|       80 |       NULL |
+|       95 |       NULL |
++----------+------------+
+4 rows in set (0.00 sec)
+
+Empty set (0.00 sec)
+
+Empty set (0.00 sec)
+
+Empty set (0.00 sec)
+
++----------------+----------------+----------------+
+| minimum_salary | average_salary | maximum_salary |
++----------------+----------------+----------------+
+|           2072 |      4544.6800 |           6699 |
++----------------+----------------+----------------+
+1 row in set (0.00 sec)
+
+Empty set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0

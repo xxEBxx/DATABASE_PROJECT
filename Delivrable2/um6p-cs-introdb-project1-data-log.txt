@@ -1,0 +1,65 @@
+mysql> source C:\Users\hp\Desktop\Deliverable2\um6p-cs-introdb-project1-data.sql
+Database changed
+Query OK, 400 rows affected (0.12 sec)
+Records: 400  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 125 rows affected (0.01 sec)
+Records: 125  Duplicates: 0  Warnings: 0
+
+Query OK, 100 rows affected (0.01 sec)
+Records: 100  Duplicates: 0  Warnings: 0
+
+Query OK, 10 rows affected (0.00 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+Query OK, 40 rows affected (0.00 sec)
+Records: 40  Duplicates: 0  Warnings: 0
+
+Query OK, 10 rows affected (0.00 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+Query OK, 16 rows affected (0.00 sec)
+Records: 16  Duplicates: 0  Warnings: 0
+
+Query OK, 40 rows affected (0.00 sec)
+Records: 40  Duplicates: 0  Warnings: 0
+
+Query OK, 22 rows affected (0.00 sec)
+Records: 22  Duplicates: 0  Warnings: 0
+
+Query OK, 50 rows affected (0.00 sec)
+Records: 50  Duplicates: 0  Warnings: 0
+
+Query OK, 400 rows affected (0.09 sec)
+Records: 400  Duplicates: 0  Warnings: 0
+
+Query OK, 28 rows affected (0.00 sec)
+Records: 28  Duplicates: 0  Warnings: 0
+
+Query OK, 10 rows affected (0.00 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+Query OK, 500 rows affected (0.03 sec)
+Records: 500  Duplicates: 0  Warnings: 0
+
+Query OK, 500 rows affected (0.04 sec)
+Records: 500  Duplicates: 0  Warnings: 0
+
+Query OK, 1512 rows affected (0.05 sec)
+Records: 1512  Duplicates: 0  Warnings: 0
+
+ERROR 1062 (23000): Duplicate entry 'Treadmills-Life Fitness' for key 'equipment_type_brand.PRIMARY'
+ERROR 1062 (23000): Duplicate entry '5V3PBSMZ' for key 'equipment_barcode.PRIMARY'
+ERROR 1062 (23000): Duplicate entry '5V3PBSMZ-1' for key 'equipment_details.PRIMARY'
+
+Query OK, 51 rows affected (0.00 sec)
+Records: 51  Duplicates: 0  Warnings: 0
+
+Query OK, 15 rows affected (0.00 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
