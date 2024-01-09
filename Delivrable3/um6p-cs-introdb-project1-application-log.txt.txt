@@ -1,0 +1,193 @@
+mysql> use gym;
+Database changed
+mysql> -- This select is for the technicians , it allows them to see the equiments that need to
+mysql> -- be maintained in teh next 5 days
+mysql>         SELECT space_id, eb.barcode, equipment_id, last_check_date, DATEDIFF(DATE_ADD(last_check_date, INTERVAL check_interval_days DAY), CURDATE()) AS remaining_days
+    ->         FROM Equipment_details AS ed
+    ->         JOIN Equipment_barcode AS eb ON eb.barcode = ed.barcode
+    ->         JOIN Equipment_type_brand AS etb ON etb.e_type = eb.e_type AND etb.brand = eb.brand
+    ->         WHERE DATE_ADD(last_check_date, INTERVAL (check_interval_days - 5) DAY) <= curdate()
+    ->         AND curdate() <= DATE_ADD(last_check_date, INTERVAL check_interval_days DAY)
+    ->         ORDER BY remaining_days, check_interval_days DESC;
++----------+----------+--------------+-----------------+----------------+
+| space_id | barcode  | equipment_id | last_check_date | remaining_days |
++----------+----------+--------------+-----------------+----------------+
+|       15 | UYR1EPT3 |            2 | 2023-09-29      |              0 |
+|       23 | EB8IAUCD |            3 | 2023-10-09      |              0 |
+|       47 | ABRJZWUS |            2 | 2023-10-09      |              0 |
+|       30 | Q1VJ037K |            3 | 2023-10-09      |              0 |
+|       40 | O08ALTRW |            1 | 2023-11-08      |              0 |
+|       12 | QYOWCPHK |            5 | 2023-11-08      |              0 |
+|       38 | 1WBICG0A |            2 | 2023-09-10      |              1 |
+|       48 | KQTDBU89 |            1 | 2023-09-10      |              1 |
+|       50 | IQE920GX |            1 | 2023-09-30      |              1 |
+|       33 | PVJ42SBZ |            2 | 2023-09-30      |              1 |
+|       39 | QCTUM3ED |            3 | 2023-09-30      |              1 |
+|       23 | U1QWA9VX |            1 | 2023-09-30      |              1 |
+|       48 | BTXCZMQ7 |            2 | 2023-09-30      |              1 |
+|       14 | BHGDWU1F |            3 | 2023-10-10      |              1 |
+|       35 | 9N6YQ051 |            2 | 2023-10-10      |              1 |
+|       50 | ABRJZWUS |            5 | 2023-10-10      |              1 |
+|       32 | JZ0PNR7G |            2 | 2023-11-09      |              1 |
+|       21 | I3BTP85K |            1 | 2023-10-01      |              2 |
+|       18 | BJ7DQLOG |            2 | 2023-10-01      |              2 |
+|       32 | K79C4ZTG |            3 | 2023-11-10      |              2 |
+|       33 | RMKA8LJ6 |            1 | 2023-11-10      |              2 |
+|       26 | MSEN96OZ |            2 | 2023-09-12      |              3 |
+|       45 | 8KLWOIZN |            3 | 2023-09-12      |              3 |
+|       41 | 895UEQS2 |            1 | 2023-10-12      |              3 |
+|       24 | 8FZR4ISN |            1 | 2023-10-12      |              3 |
+|       22 | 2JIP95QO |            5 | 2023-10-12      |              3 |
+|       28 | 8YJQX6UR |            1 | 2023-09-13      |              4 |
+|       38 | 8YARJHLW |            1 | 2023-10-03      |              4 |
+|       18 | DJN3AUH0 |            1 | 2023-10-13      |              4 |
+|       13 | EBGIAJ9P |            1 | 2023-11-12      |              4 |
+|       24 | A693JN0G |            4 | 2023-11-12      |              4 |
+|       30 | 8ZJ4X9TI |            1 | 2023-09-14      |              5 |
+|       32 | 6F1UR4NG |            3 | 2023-09-14      |              5 |
+|       38 | QCTUM3ED |            2 | 2023-10-04      |              5 |
+|       45 | ZVECI0MJ |            2 | 2023-10-04      |              5 |
+|       26 | 6FTC5BID |            1 | 2023-10-14      |              5 |
+|       22 | DJN3AUH0 |            5 | 2023-10-14      |              5 |
+|       17 | BRCX6EK8 |            3 | 2023-11-13      |              5 |
+|       41 | OQL97AS0 |            2 | 2023-11-13      |              5 |
+|       40 | 5GX64MOV |            2 | 2023-11-13      |              5 |
+|       29 | SOM4NUAC |            2 | 2023-11-13      |              5 |
+|       14 | 5V3PBSMZ |            4 | 2023-11-13      |              5 |
++----------+----------+--------------+-----------------+----------------+
+42 rows in set (0.09 sec)
+
+mysql>
+mysql>
+mysql> -- this select let's the customer see all his upcoming sessions
+mysql>  SELECT DISTINCT d.discipline_id, d.d_name
+    ->         FROM discipline d
+    ->         JOIN has h ON d.discipline_id = h.discipline_id
+    ->         JOIN membership m ON h.membership_id = m.membership_id
+    ->         JOIN subscribed s ON m.membership_id = s.membership_id
+    ->         WHERE s.customer_id = 5;
++---------------+---------------+
+| discipline_id | d_name        |
++---------------+---------------+
+|             2 | Weightlifting |
+|             3 | Yoga          |
+|            12 | Swimming      |
+|            14 | Kickboxing    |
++---------------+---------------+
+4 rows in set (0.08 sec)
+
+mysql> -- This select let's the admin choose a feedback from the ones not taken and work on it
+mysql> SELECT * FROM `feedback` WHERE admin_id IS NULL;
++-------------+--------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+----------+
+| feedback_id | f_title                                                                        | f_text
+
+
+
+                                                                                                                         | customer_id | admin_id |
++-------------+--------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+----------+
+|           1 | lorem, eget mollis lectus pede et risus. Quisque libero lacus,                 | rutrum non, hendrerit id, ante. Nunc mauris sapien, cursus in, hendrerit consectetuer, cursus et, magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis, magna tellus faucibus leo, in lobortis tellus justo sit amet nulla. Donec non justo. Proin non massa non ante bibendum ullamcorper. Duis cursus, diam at pretium aliquet, metus urna convallis erat, eget tincidunt dui augue eu tellus. Phasellus elit pede, malesuada vel, venenatis vel, faucibus id, libero. Donec |          22 |     NULL |
+|           2 | mollis. Phasellus                                                              | lacus vestibulum lorem, sit amet ultricies sem magna nec quam. Curabitur vel lectus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec dignissim magna
+
+                                                                                                                         |          46 |     NULL |
+|           3 | Aenean eget magna. Suspendisse tristique neque venenatis lacus. Etiam bibendum | consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et nunc. Quisque ornare tortor at risus. Nunc ac sem ut
+
+                                                                                                                         |          72 |     NULL |
+|           4 | Donec tincidunt. Donec vitae erat vel pede blandit                             | laoreet, libero et tristique pellentesque, tellus sem mollis dui, in sodales elit erat vitae risus. Duis a mi fringilla mi lacinia mattis. Integer eu lacus. Quisque imperdiet, erat nonummy ultricies ornare, elit elit fermentum risus, at fringilla purus mauris a nunc. In at pede. Cras vulputate velit eu sem. Pellentesque ut ipsum ac mi eleifend egestas. Sed
+                                                                                                                         |          35 |     NULL |
+|           5 | placerat, orci                                                                 | et, magna. Praesent interdum ligula eu enim. Etiam imperdiet dictum magna. Ut tincidunt orci quis lectus. Nullam suscipit, est ac facilisis facilisis, magna tellus faucibus
+
+                                                                                                                         |          26 |     NULL |
+|           6 | tellus eu augue porttitor                                                      | felis orci, adipiscing non, luctus sit amet, faucibus ut, nulla. Cras eu tellus eu augue porttitor interdum. Sed auctor odio a purus. Duis elementum, dui quis accumsan convallis, ante lectus convallis est, vitae sodales nisi magna sed dui. Fusce aliquam, enim nec tempus scelerisque, lorem ipsum sodales purus, in molestie tortor nibh sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque. In ornare sagittis                                                                                          |          73 |     NULL |
++-------------+--------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> DROP PROCEDURE IF EXISTS GetTrainerDetails;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE GetTrainerDetails(IN trainerId INT)
+    -> BEGIN
+    ->     SELECT * FROM employee WHERE employee_id = trainerId;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql>
+mysql> -- THIS procedure basicaly just insert membership and customers to our database
+mysql> -- one of the most useful
+mysql> DELIMITER //
+mysql> DROP PROCEDURE IF EXISTS InsertMembershipAndCustomers;
+    ->
+    -> CREATE PROCEDURE InsertMembershipAndCustomers()
+    -> BEGIN
+    ->     DECLARE i INT DEFAULT 0;
+    ->     DECLARE membership_id INT;
+    ->
+    ->     START TRANSACTION;
+    ->
+    ->     INSERT INTO `membership` (number_person_involved, duration)
+    ->     VALUES (3, 6);
+    ->
+    ->     SET membership_id = LAST_INSERT_ID();
+    ->
+    ->     WHILE i < 3 DO
+    ->         INSERT INTO `customer` (c_name, registration_date, birth_date, contact)
+    ->         VALUES
+    ->             ('John Doe', '2022-01-05', '1990-01-01', '1234567890'),
+    ->             ('Jane Doe', '2022-01-05', '1995-02-15', '9876543210'),
+    ->             ('Bob Smith', '2022-01-05', '1985-05-20', '5555555555');
+    ->
+    ->         INSERT INTO `subscribed` (payment_id, type_of_payment, date_of_payment, customer_id, membership_id)
+    ->         VALUES (membership_id, 'Credit Card', '2022-01-05', LAST_INSERT_ID(), membership_id);
+    ->
+    ->         SET i = i + 1;
+    ->     END WHILE;
+    ->
+    ->     SET i = 0;
+    ->     WHILE i < 1 DO
+    ->         SELECT discipline_id INTO @discipline_id
+    ->         FROM `discipline`
+    ->         WHERE d_name = 'Yoga' LIMIT 1;
+    ->
+    ->         INSERT INTO `has` (membership_id, discipline_id)
+    ->         VALUES (membership_id, @discipline_id);
+    ->
+    ->         SET i = i + 1;
+    ->     END WHILE;
+    ->
+    ->     COMMIT;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql>
+mysql> CALL InsertMembershipAndCustomers();
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql>
+mysql> CALL GetTrainerDetails(3);
++-------------+-----------+--------+--------------+----------------+
+| employee_id | e_name    | salary | contact      | first_day_work |
++-------------+-----------+--------+--------------+----------------+
+|           3 | Anne Owen |   6439 | 886.802.3299 | 2017-06-21     |
++-------------+-----------+--------+--------------+----------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> CALL GetTrainerDetails(6);
++-------------+----------------+--------+-----------------------+----------------+
+| employee_id | e_name         | salary | contact               | first_day_work |
++-------------+----------------+--------+-----------------------+----------------+
+|           6 | David Martinez |   5301 | 001-211-740-5575x9818 | 2016-05-02     |
++-------------+----------------+--------+-----------------------+----------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
