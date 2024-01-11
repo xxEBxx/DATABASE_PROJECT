@@ -1,0 +1,10 @@
+Transactions used in technician contain 2 queries : 
+	-First one: change the last check dat of the equipment to the current day
+	-Second one : add the value (barcode,equipment_id,trainer_id) to the maintains table pr change it to the current trainer (if the key is already on the table)
+
+Transaction used in Admin to remove a membership :
+	It does remove all the customers of that membership , the relationship with the disciplines and then the membership itself.
+
+
+Transaction used in Admin to add a new membership :
+	I used this transaction for creating new memberships to ensure atomicity: either all steps (adding memberships and customers to their respective tables and updating relations in the subscribed and has tables) are completed, or none are, ensuring data consistency and integrity.

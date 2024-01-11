@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    position: relative;
+}
+
+.logout-button {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    padding: 5px 15px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: darkred;
+}
+
+.main-content {
+    margin-top: 50px;
+}
+
+.admin-button {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.admin-button:hover {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button class="logout-button" onclick="location.href='../../index.php'">Logout</button>
+    </div>
+    <div class="main-content">
+        <button class="admin-button" onclick="location.href='adminDetails.php'">My Details</button>
+        <button class="admin-button" onclick="location.href='adminOffice.php'">My Office</button>
+        <button class="admin-button" onclick="location.href='adminFeedback.php'">View Feedbacks</button>
+        <button class="admin-button" onclick="location.href='viewMem.html'">View Membership</button>
+        <button class="admin-button" onclick="location.href='createForm.php'">Create new membership</button>
+        <button class="admin-button" onclick="location.href='deleteMem.html'">Delete membership</button>
+    </div>
+</body>
+</html>
